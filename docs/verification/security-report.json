@@ -1,0 +1,234 @@
+{
+  "assessment": "scoped-application-security-smoke",
+  "recordedAt": "2026-10-20T22:51:26.862Z",
+  "origin": "http://127.0.0.1:4173",
+  "runtime": "v24.21.0",
+  "passed": true,
+  "requestCount": 44,
+  "maximumRequests": 60,
+  "checkCount": 44,
+  "failureCount": 0,
+  "elapsedMs": 257.21,
+  "checks": [
+    {
+      "name": "Service is healthy before testing",
+      "passed": true,
+      "elapsedMs": 78.23
+    },
+    {
+      "name": "Known basket uses authoritative prices and no-store",
+      "passed": true,
+      "elapsedMs": 9.56
+    },
+    {
+      "name": "Storefront has restrictive security headers",
+      "passed": true,
+      "elapsedMs": 14.87
+    },
+    {
+      "name": "Rejects an injected unit price",
+      "passed": true,
+      "elapsedMs": 3.99
+    },
+    {
+      "name": "Rejects a client-supplied total",
+      "passed": true,
+      "elapsedMs": 3.72
+    },
+    {
+      "name": "Rejects a client-supplied discount",
+      "passed": true,
+      "elapsedMs": 2.86
+    },
+    {
+      "name": "Rejects an injected line discount",
+      "passed": true,
+      "elapsedMs": 2.63
+    },
+    {
+      "name": "Rejects an unknown product code",
+      "passed": true,
+      "elapsedMs": 2.86
+    },
+    {
+      "name": "Rejects a negative quantity",
+      "passed": true,
+      "elapsedMs": 2.87
+    },
+    {
+      "name": "Rejects a zero quantity",
+      "passed": true,
+      "elapsedMs": 5.18
+    },
+    {
+      "name": "Rejects a fractional quantity",
+      "passed": true,
+      "elapsedMs": 5.31
+    },
+    {
+      "name": "Rejects a string quantity",
+      "passed": true,
+      "elapsedMs": 4.3
+    },
+    {
+      "name": "Rejects a unsafe integer quantity",
+      "passed": true,
+      "elapsedMs": 3.19
+    },
+    {
+      "name": "Rejects a null quantity",
+      "passed": true,
+      "elapsedMs": 2.44
+    },
+    {
+      "name": "Rejects a boolean quantity",
+      "passed": true,
+      "elapsedMs": 1.71
+    },
+    {
+      "name": "Rejects a oversized quantity",
+      "passed": true,
+      "elapsedMs": 1.88
+    },
+    {
+      "name": "Rejects an aggregate quantity above 100",
+      "passed": true,
+      "elapsedMs": 2.17
+    },
+    {
+      "name": "Rejects duplicate lines exceeding the basket limit",
+      "passed": true,
+      "elapsedMs": 1.67
+    },
+    {
+      "name": "Rejects a request with more than 100 product lines",
+      "passed": true,
+      "elapsedMs": 2.76
+    },
+    {
+      "name": "Rejects malformed JSON",
+      "passed": true,
+      "elapsedMs": 6.23
+    },
+    {
+      "name": "Rejects top-level prototype poisoning",
+      "passed": true,
+      "elapsedMs": 3.71
+    },
+    {
+      "name": "Rejects constructor prototype poisoning",
+      "passed": true,
+      "elapsedMs": 4.26
+    },
+    {
+      "name": "Rejects nested prototype poisoning",
+      "passed": true,
+      "elapsedMs": 4.4
+    },
+    {
+      "name": "Rejects nested constructor prototype poisoning",
+      "passed": true,
+      "elapsedMs": 3.77
+    },
+    {
+      "name": "Rejects SQL-like product code injection",
+      "passed": true,
+      "elapsedMs": 3.11
+    },
+    {
+      "name": "Rejects HTML and script in a product code",
+      "passed": true,
+      "elapsedMs": 3.34
+    },
+    {
+      "name": "Rejects command-like product code injection",
+      "passed": true,
+      "elapsedMs": 2.71
+    },
+    {
+      "name": "Rejects executable-code fields",
+      "passed": true,
+      "elapsedMs": 5.25
+    },
+    {
+      "name": "Rejects a request body larger than 16 KiB",
+      "passed": true,
+      "elapsedMs": 5.15
+    },
+    {
+      "name": "Rejects an XML request body",
+      "passed": true,
+      "elapsedMs": 2.98
+    },
+    {
+      "name": "Unsupported HTTP method cannot mutate a quote",
+      "passed": true,
+      "elapsedMs": 3.03
+    },
+    {
+      "name": "Denies environment file access without source leakage",
+      "passed": true,
+      "elapsedMs": 3.78
+    },
+    {
+      "name": "Denies Git metadata access without source leakage",
+      "passed": true,
+      "elapsedMs": 4
+    },
+    {
+      "name": "Denies package manager configuration access without source leakage",
+      "passed": true,
+      "elapsedMs": 3.68
+    },
+    {
+      "name": "Denies package metadata access without source leakage",
+      "passed": true,
+      "elapsedMs": 7.57
+    },
+    {
+      "name": "Denies source file access without source leakage",
+      "passed": true,
+      "elapsedMs": 9.03
+    },
+    {
+      "name": "Denies encoded slash traversal access without source leakage",
+      "passed": true,
+      "elapsedMs": 4.82
+    },
+    {
+      "name": "Denies encoded backslash traversal access without source leakage",
+      "passed": true,
+      "elapsedMs": 2.64
+    },
+    {
+      "name": "Denies nested encoded traversal access without source leakage",
+      "passed": true,
+      "elapsedMs": 3.88
+    },
+    {
+      "name": "Unexpected origin receives no CORS permission",
+      "passed": true,
+      "elapsedMs": 3.27
+    },
+    {
+      "name": "Unexpected-origin preflight receives no CORS permission",
+      "passed": true,
+      "elapsedMs": 2.58
+    },
+    {
+      "name": "Service remains healthy after hostile inputs",
+      "passed": true,
+      "elapsedMs": 2.32
+    },
+    {
+      "name": "Readiness remains available after hostile inputs",
+      "passed": true,
+      "elapsedMs": 2.4
+    },
+    {
+      "name": "Pricing remains correct after hostile inputs",
+      "passed": true,
+      "elapsedMs": 3.39
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+{
+  "info": {
+    "_postman_id": "b1e0c9de-4601-40c6-815b-a1a72bee965f",
+    "name": "Acme Widget Co",
+    "description": "Anonymous basket quotations by elitecoderdev. Start the application, select the local environment, and run this collection. All money is integer USD cents. Requests do not create orders or collect payments.\n\nDesigned, implemented & documented by **elitecoderdev — Luis Jimenez**.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Service and catalog",
+      "item": [
+        {
+          "name": "Readiness",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Ready', function () { pm.expect(pm.response.json().status).to.eql('ready'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/readyz",
+              "host": ["{{baseUrl}}"],
+              "path": ["readyz"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Liveness",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/healthz",
+              "host": ["{{baseUrl}}"],
+              "path": ["healthz"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Product catalog and offers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Three products and four examples', function () { const data = pm.response.json(); pm.expect(data.products).to.have.lengthOf(3); pm.expect(data.examples).to.have.lengthOf(4); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/catalog",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "catalog"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Challenge examples",
+      "item": [
+        {
+          "name": "Blue and green - $37.85",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 3785 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(3785); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"B01\",\n      \"quantity\": 1\n    },\n    {\n      \"code\": \"G01\",\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Two reds - $54.37",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 5437 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(5437); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 2\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Red and green - $60.85",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 6085 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(6085); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 1\n    },\n    {\n      \"code\": \"G01\",\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Two blues and three reds - $98.27",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 9827 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(9827); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"B01\",\n      \"quantity\": 2\n    },\n    {\n      \"code\": \"R01\",\n      \"quantity\": 3\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Boundary behavior",
+      "item": [
+        {
+          "name": "Empty basket - no delivery",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 0 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(0); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Four reds - per-unit cent rounding",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 9884 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(9884); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 4\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Duplicate red lines normalize to one pair",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });",
+                  "pm.test('Total is 5437 cents', function () { pm.expect(pm.response.json().totalCents).to.eql(5437); });",
+                  "pm.test('Currency is USD', function () { pm.expect(pm.response.json().currency).to.eql('USD'); });",
+                  "pm.test('Quote is not cacheable', function () { pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-store'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 1\n    },\n    {\n      \"code\": \"R01\",\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unknown product rejected",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 422', function () { pm.response.to.have.status(422); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"X99\",\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Zero quantity rejected",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "String quantity rejected",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": \"2\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Client price tampering rejected",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 1,\n      \"priceCents\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Aggregate quantity over 100 rejected",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 422', function () { pm.response.to.have.status(422); });",
+                  "pm.test('JSON response', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"code\": \"R01\",\n      \"quantity\": 100\n    },\n    {\n      \"code\": \"B01\",\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quotes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quotes"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

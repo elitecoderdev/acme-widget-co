@@ -1,0 +1,9 @@
+project_id          = "your-project-id"
+region              = "us-central1"
+service_name        = "acme-widget-co"
+deploy_service      = false
+public_access       = false
+min_instances       = 0
+max_instances       = 20
+concurrency         = 80
+deletion_protection = true

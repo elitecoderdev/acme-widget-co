@@ -1,0 +1,40 @@
+{
+  "benchmark": "basket-quote",
+  "recordedAt": "2026-10-20T22:52:13.178Z",
+  "runtime": "v24.21.0",
+  "configuration": {
+    "endpoint": "http://127.0.0.1:4173/api/quotes",
+    "concurrency": 16,
+    "requests": 400,
+    "warmup": 20,
+    "timeoutMs": 5000
+  },
+  "expectedTotalCents": 9827,
+  "passed": true,
+  "warmup": {
+    "sampleCount": 20,
+    "successfulSamples": 20,
+    "errorCount": 0,
+    "elapsedMs": 137.33,
+    "requestsPerSecond": 145.63,
+    "latencyMs": {
+      "p50": 62.25,
+      "p95": 65.69,
+      "p99": 109.88
+    },
+    "errors": []
+  },
+  "measurement": {
+    "sampleCount": 400,
+    "successfulSamples": 400,
+    "errorCount": 0,
+    "elapsedMs": 382.03,
+    "requestsPerSecond": 1047.05,
+    "latencyMs": {
+      "p50": 14.59,
+      "p95": 22,
+      "p99": 25.37
+    },
+    "errors": []
+  }
+}
