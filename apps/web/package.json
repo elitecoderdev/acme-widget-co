@@ -1,0 +1,22 @@
+{
+  "name": "@acme/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build --configLoader native && node ../../scripts/precompress.mjs",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@acme/domain": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "author": {
+    "name": "elitecoderdev — Luis Jimenez",
+    "email": "devs@elitecoders.cl",
+    "url": "https://github.com/elitecoderdev"
+  }
+}

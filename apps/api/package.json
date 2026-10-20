@@ -1,0 +1,26 @@
+{
+  "name": "@acme/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "vite build --configLoader native",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@acme/domain": "workspace:*",
+    "@fastify/helmet": "13.2.0",
+    "@fastify/rate-limit": "11.2.1",
+    "@fastify/static": "10.1.6",
+    "fastify": "5.12.7"
+  },
+  "author": {
+    "name": "elitecoderdev — Luis Jimenez",
+    "email": "devs@elitecoders.cl",
+    "url": "https://github.com/elitecoderdev"
+  }
+}
