@@ -1,0 +1,18 @@
+{
+  "name": "@acme/domain",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "author": {
+    "name": "elitecoderdev — Luis Jimenez",
+    "email": "devs@elitecoders.cl",
+    "url": "https://github.com/elitecoderdev"
+  }
+}
