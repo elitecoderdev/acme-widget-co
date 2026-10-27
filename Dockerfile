@@ -1,4 +1,4 @@
-FROM node:24.21.0-bookworm-slim AS base
+FROM node:26.12.1-bookworm-slim AS base
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
 WORKDIR /app
@@ -20,7 +20,7 @@ COPY packages/domain/package.json ./packages/domain/package.json
 RUN rm -rf /app/node_modules
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm --filter @acme/api... install --prod --offline --frozen-lockfile --store-dir=/pnpm/store
 
-FROM node:24.21.0-bookworm-slim AS runtime
+FROM node:26.12.1-bookworm-slim AS runtime
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=8080
